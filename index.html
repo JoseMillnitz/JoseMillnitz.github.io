@@ -1,22 +1,73 @@
 <!DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython.min.js">
-    </script>
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython_stdlib.js">
-    </script>
-</head>
 <html>
-<body onload="brython()">
-  
-<script type="text/python">
-from browser import document
+  <head>
+    <meta charset="UTF-8">
+    <title>Password Generator</title>
+  </head>
+  <body>
+    <h1>Password Generator</h1>
+    <form>
+      <label for="name">Enter your name:</label>
+      <input type="text" id="name">
+      <button type="button" onclick="generatePasswords()">Generate Passwords</button>
+    </form>
+    <h2>Passwords:</h2>
+    <ul>
+      <li><strong>Password 1:</strong> <span id="password1"></span></li>
+      <li><strong>Password 2:</strong> <span id="password2"></span></li>
+      <li><strong>Password 3:</strong> <span id="password3"></span></li>
+    </ul>
+    <h2> Legacy code in python, will suport till end 12/09/23 (dd/mm/yyyy):</h2>
+    <iframe src="https://www.online-python.com/pxJeHGlCtk" width="800" height="400"></iframe>
+    <script>
+    	function generatePasswords() {
+  			let letters = document.getElementById("name").value.toLowerCase();
+  			let middle = 0;
 
-document <= "Hello !"</script>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-<iframe src="http://brython.info/console.html" width="800" height="400"></iframe>
-</body>
+	  		function middle_calculus() {
+    			if (letters.length % 2 == 0) {
+      				middle = BigInt(letters.length / 2) - BigInt(1);
+    			} else {
+	      			middle = BigInt(Math.floor(letters.length / 2));
+    			}
+  			}
+
+	  		middle_calculus();
+
+  			let first_char = letters.charAt(0);
+  			let last_char = letters.charAt(Number(middle));
+	  		let both = first_char.toUpperCase() + last_char;
+  
+
+			let numbers = letters.split('').map(function(letter) {
+  				let n = BigInt(letter.charCodeAt(0) - 96);
+  				return n < 0 ? BigInt.asIntN(32, n) : n;
+			});
+
+	  		let strings = numbers.map(function(integer) {
+    			return String(integer);
+  			});
+
+  			let strings_filled = strings.map(function(item) {
+    			return item.padStart(2, '0');
+  			});
+
+  			let a_string = strings_filled.join("");
+  			let n = BigInt(a_string);
+
+  			let x = n * n;
+  			console.log(x)
+  			//let y = BigInt.asIntN(256, x / BigInt(2));
+  			let y = x >> 1n;
+
+  			let password1 = `2V[${y}+${y}]=${letters}`;
+  			let password2 = `${y}${both}`;
+  			let password3 = `${n}`;
+
+  			document.getElementById("password1").innerHTML = password1;
+  			document.getElementById("password2").innerHTML = password2;
+  			document.getElementById("password3").innerHTML = password3;
+    	}
+    </script>
+  </body>
 </html>
